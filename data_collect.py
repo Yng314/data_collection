@@ -1,7 +1,9 @@
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for, send_file
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
 import os
+import numpy as np
+import shutil
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
@@ -114,6 +116,44 @@ def delete_user(user_id):
     db.session.delete(user)
     db.session.commit()
     return redirect(url_for('index'))
+
+
+@app.route('/export')
+def export_data():
+    users = User.query.all()
+    data = {
+        'users': [],
+        'files': {}
+    }
+    
+    for user in users:
+        user_data = {
+            'name': user.name,
+            'gender': user.gender,
+            'sizhen': user.sizhen,
+            'tizhi': user.tizhi
+        }
+        data['users'].append(user_data)
+        
+        user_files = []
+        for file in user.files:
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], str(user.id), file.filename)
+            if os.path.exists(file_path):
+                with open(file_path, 'rb') as f:
+                    user_files.append({
+                        'filename': file.filename,
+                        'filetype': file.filetype,
+                        'content': f.read()
+                    })
+        data['files'][user.id] = user_files
+
+    temp_dir = 'temp_data'
+    os.makedirs(temp_dir, exist_ok=True)
+    npz_path = os.path.join(temp_dir, 'exported_data.npz')
+    
+    np.savez_compressed(npz_path, users=data['users'], files=data['files'])
+    
+    return {'status': 'success', 'message': '数据导出成功!'}, 200
 
 if __name__ == '__main__':
     app.run(debug=True)
