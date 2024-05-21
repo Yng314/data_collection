@@ -20,8 +20,14 @@
                 <input type="text" id="gender" name="gender" class="form-control" required>
             </div>
             <div class="mb-3">
-                <label for="file" class="form-label">上传舌诊文件：</label>
-                <input type="file" id="file" name="file" class="form-control" required>
+                <label for="shezhen_files" class="form-label">上传舌诊文件：</label>
+                <input type="file" id="shezhen_files" name="files" class="form-control" multiple required>
+                <input type="hidden" name="filetypes" value="shezhen_files">
+            </div>
+            <div class="mb-3">
+                <label for="vaginoscope_files" class="form-label">上传阴道镜文件：</label>
+                <input type="file" id="vaginoscope_files" name="files" class="form-control" multiple>
+                <input type="hidden" name="filetypes" value="vaginoscope_files">
             </div>
             <button type="submit" class="btn btn-primary">添加数据</button>
         </form>
