@@ -13,6 +13,10 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     gender = db.Column(db.String(10), nullable=False)
+    # 临床四诊信息
+    sizhen = db.Column(db.String(1000), nullable=False)
+    # 中医体质辨识
+    tizhi = db.Column(db.String(1000), nullable=False)
     files = db.relationship('File', backref='user', cascade="all, delete-orphan")
 
 class File(db.Model):
@@ -37,11 +41,13 @@ def add_user():
     if request.method == 'POST':
         name = request.form['name']
         gender = request.form['gender']
+        sizhen = request.form['sizhen']
+        tizhi = request.form['tizhi']
         files = request.files.getlist('files')
         print(files)
         filetypes = request.form.getlist('filetypes')  # 确保获取正确的参数
 
-        new_user = User(name=name, gender=gender)
+        new_user = User(name=name, gender=gender, sizhen=sizhen, tizhi=tizhi)
         db.session.add(new_user)
         db.session.commit()
 

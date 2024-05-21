@@ -21,6 +21,50 @@
                 <input type="text" id="gender" name="gender" value="{{ user.gender }}" required class="form-control">
             </div>
             <div class="mb-3">
+                <label for="sizhen" class="form-label">临床四诊：</label>
+                <input type="text" id="sizhen" name="sizhen" value="{{ user.sizhen }}" required class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="tizhi" class="form-label">中医体质辨识：</label>
+                <input type="text" id="tizhi" name="tizhi" value="{{ user.tizhi }}" required class="form-control">
+            </div>
+            <div class="mb-3">
+                <div class="uploaded-files">
+                    <p>已上传的人体弱磁感应文件：</p>
+                    <span class="file-links">
+                        {% for file in user.files %}
+                            {% if 'ruoci_files' in file.filetype %}
+                                <a href="{{ url_for('static', filename='uploads/' + user.id|string + '/' + file.filename) }}">{{ file.filename }}</a>
+                            {% endif %}
+                        {% endfor %}
+                    </span>
+                    <p>
+                    <label for="ruoci_files" class="form-label" style="display: none;">更新舌诊文件：</label>
+                    <input type="file" id="ruoci_files" name="files" class="form-control" multiple>
+                    <input type="hidden" name="filetypes" value="ruoci_files">
+                    </p>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <div class="uploaded-files">
+                    <p>已上传的脉诊文件：</p>
+                    <span class="file-links">
+                        {% for file in user.files %}
+                            {% if 'maizhen_files' in file.filetype %}
+                                <a href="{{ url_for('static', filename='uploads/' + user.id|string + '/' + file.filename) }}">{{ file.filename }}</a>
+                            {% endif %}
+                        {% endfor %}
+                    </span>
+                    <p>
+                    <label for="maizhen_files" class="form-label" style="display: none;">更新舌诊文件：</label>
+                    <input type="file" id="maizhen_files" name="files" class="form-control" multiple>
+                    <input type="hidden" name="filetypes" value="maizhen_files">
+                    </p>
+                </div>
+            </div>
+
+            <div class="mb-3">
                 <div class="uploaded-files">
                     <p>已上传的舌诊文件：</p>
                     <span class="file-links">
@@ -30,8 +74,12 @@
                             {% endif %}
                         {% endfor %}
                     </span>
+                    <p>
                     <label for="shezhen_files" class="form-label" style="display: none;">更新舌诊文件：</label>
-                    <input type="file" id="shezhen_files" name="files" class="form-control" multiple style="display: none;">
+                    <input type="file" id="shezhen_files" name="files" class="form-control" multiple>
+                    <input type="hidden" name="filetypes" value="shezhen_files">
+                    </p>
+                    <!-- <input type="file" id="shezhen_files" name="files" class="form-control" multiple style="display: none;">
                     <input type="hidden" name="filetypes" value="shezhen_files">
                     <button type="button" class="button" onclick="triggerFileInput('shezhen_files')">
                       <svg class="svgIcon" viewBox="0 0 384 512">
@@ -39,9 +87,64 @@
                           d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"
                         ></path>
                       </svg>
-                    </button>
+                    </button> -->
                 </div>
             </div>
+
+            <div class="mb-3">
+                <div class="uploaded-files">
+                    <p>已上传的红外热成像文件：</p>
+                    <span class="file-links">
+                        {% for file in user.files %}
+                            {% if 'hongwai_files' in file.filetype %}
+                                <a href="{{ url_for('static', filename='uploads/' + user.id|string + '/' + file.filename) }}">{{ file.filename }}</a>
+                            {% endif %}
+                        {% endfor %}
+                    </span>
+                    <p>
+                    <label for="hongwai_files" class="form-label" style="display: none;">更新舌诊文件：</label>
+                    <input type="file" id="hongwai_files" name="files" class="form-control" multiple>
+                    <input type="hidden" name="filetypes" value="hongwai_files">
+                    </p>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <div class="uploaded-files">
+                    <p>已上传的阴道分泌物菌群文件：</p>
+                    <span class="file-links">
+                        {% for file in user.files %}
+                            {% if 'junqun_files' in file.filetype %}
+                                <a href="{{ url_for('static', filename='uploads/' + user.id|string + '/' + file.filename) }}">{{ file.filename }}</a>
+                            {% endif %}
+                        {% endfor %}
+                    </span>
+                    <p>
+                    <label for="junqun_files" class="form-label" style="display: none;">更新舌诊文件：</label>
+                    <input type="file" id="junqun_files" name="files" class="form-control" multiple>
+                    <input type="hidden" name="filetypes" value="junqun_files">
+                    </p>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <div class="uploaded-files">
+                    <p>已上传的阴道分泌物代谢组学文件：</p>
+                    <span class="file-links">
+                        {% for file in user.files %}
+                            {% if 'daixie_files' in file.filetype %}
+                                <a href="{{ url_for('static', filename='uploads/' + user.id|string + '/' + file.filename) }}">{{ file.filename }}</a>
+                            {% endif %}
+                        {% endfor %}
+                    </span>
+                    <p>
+                    <label for="daixie_files" class="form-label" style="display: none;">更新舌诊文件：</label>
+                    <input type="file" id="daixie_files" name="files" class="form-control" multiple>
+                    <input type="hidden" name="filetypes" value="daixie_files">
+                    </p>
+                </div>
+            </div>
+
             <div class="mb-3">
                 <div class="uploaded-files">
                     <p>已上传的阴道镜文件：</p>
@@ -52,7 +155,12 @@
                             {% endif %}
                         {% endfor %}
                     </span>
-                    <label for="vaginoscope_files" class="form-label" style="display: none;">更新阴道镜文件：</label>
+                    <p>
+                        <label for="vaginoscope_files" class="form-label" style="display: none;">更新阴道镜文件：</label>
+                        <input type="file" id="vaginoscope_files" name="files" class="form-control" multiple>
+                        <input type="hidden" name="filetypes" value="vaginoscope_files">
+                    </p>
+                    <!-- <label for="vaginoscope_files" class="form-label" style="display: none;">更新阴道镜文件：</label>
                     <input type="file" id="vaginoscope_files" name="files" class="form-control" multiple style="display: none;">
                     <input type="hidden" name="filetypes" value="vaginoscope_files">
                     <button type="button" class="button" onclick="triggerFileInput('vaginoscope_files')">
@@ -61,9 +169,28 @@
                             d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"
                         ></path>
                         </svg>
-                    </button>
+                    </button> -->
                 </div>
             </div>
+
+            <div class="mb-3">
+                <div class="uploaded-files">
+                    <p>已上传的宫颈病变组织转录组学文件：</p>
+                    <span class="file-links">
+                        {% for file in user.files %}
+                            {% if 'bingbian_files' in file.filetype %}
+                                <a href="{{ url_for('static', filename='uploads/' + user.id|string + '/' + file.filename) }}">{{ file.filename }}</a>
+                            {% endif %}
+                        {% endfor %}
+                    </span>
+                    <p>
+                    <label for="bingbian_files" class="form-label" style="display: none;">更新舌诊文件：</label>
+                    <input type="file" id="bingbian_files" name="files" class="form-control" multiple>
+                    <input type="hidden" name="filetypes" value="bingbian_files">
+                    </p>
+                </div>
+            </div>
+
             <button type="submit" class="btn btn-primary">更新数据</button>
         </form>
         <a href="/" class="btn btn-secondary mt-3">回到数据列表</a>

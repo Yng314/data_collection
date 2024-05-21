@@ -20,14 +20,52 @@
                 <input type="text" id="gender" name="gender" class="form-control" required>
             </div>
             <div class="mb-3">
+                <label for="sizhen" class="form-label">临床四诊：</label>
+                <input type="text" id="sizhen" name="sizhen" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="tizhi" class="form-label">中医体质辨识：</label>
+                <input type="text" id="tizhi" name="tizhi" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="ruoci_files" class="form-label">上传人体弱磁感应文件：</label>
+                <input type="file" id="ruoci_files" name="files" class="form-control" multiple>
+                <input type="hidden" name="filetypes" value="ruoci_files">
+            </div>
+            <div class="mb-3">
+                <label for="maizhen_files" class="form-label">上传脉诊文件：</label>
+                <input type="file" id="maizhen_files" name="files" class="form-control" multiple>
+                <input type="hidden" name="filetypes" value="maizhen_files">
+            </div>
+            <div class="mb-3">
                 <label for="shezhen_files" class="form-label">上传舌诊文件：</label>
                 <input type="file" id="shezhen_files" name="files" class="form-control" multiple required>
                 <input type="hidden" name="filetypes" value="shezhen_files">
             </div>
             <div class="mb-3">
+                <label for="hongwai_files" class="form-label">上传红外线热成像文件：</label>
+                <input type="file" id="hongwai_files" name="files" class="form-control" multiple>
+                <input type="hidden" name="filetypes" value="hongwai_files">
+            </div>
+            <div class="mb-3">
+                <label for="junqun_files" class="form-label">上传阴道分泌物菌群文件：</label>
+                <input type="file" id="junqun_files" name="files" class="form-control" multiple required>
+                <input type="hidden" name="filetypes" value="junqun_files">
+            </div>
+            <div class="mb-3">
+                <label for="daixie_files" class="form-label">上传阴道分泌物代谢组学文件：</label>
+                <input type="file" id="daixie_files" name="files" class="form-control" multiple>
+                <input type="hidden" name="filetypes" value="daixie_files">
+            </div>
+            <div class="mb-3">
                 <label for="vaginoscope_files" class="form-label">上传阴道镜文件：</label>
                 <input type="file" id="vaginoscope_files" name="files" class="form-control" multiple>
                 <input type="hidden" name="filetypes" value="vaginoscope_files">
+            </div>
+            <div class="mb-3">
+                <label for="bingbian_files" class="form-label">上传宫颈病变组织转录组学文件：</label>
+                <input type="file" id="bingbian_files" name="files" class="form-control" multiple>
+                <input type="hidden" name="filetypes" value="bingbian_files">
             </div>
             <button type="submit" class="btn btn-primary">添加数据</button>
         </form>
