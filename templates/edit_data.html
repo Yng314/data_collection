@@ -28,6 +28,7 @@
                 <label for="tizhi" class="form-label">中医体质辨识：</label>
                 <textarea id="tizhi" name="tizhi" rows="3" required class="form-control">{{ user.tizhi }}</textarea>
             </div>
+
             <div class="mb-3">
                 <div class="uploaded-files">
                     <p>已上传的人体弱磁感应文件：</p>
@@ -39,9 +40,8 @@
                         {% endfor %}
                     </span>
                     <p>
-                    <label for="ruoci_files" class="form-label" style="display: none;">更新舌诊文件：</label>
-                    <input type="file" id="ruoci_files" name="files" class="form-control" multiple>
-                    <input type="hidden" name="filetypes" value="ruoci_files">
+                    <label for="ruoci_files" class="form-label">更新人体弱磁感应文件：</label>
+                    <input type="file" id="ruoci_files" name="ruoci_files" class="form-control" multiple>
                     </p>
                 </div>
             </div>
@@ -57,9 +57,8 @@
                         {% endfor %}
                     </span>
                     <p>
-                    <label for="maizhen_files" class="form-label" style="display: none;">更新舌诊文件：</label>
-                    <input type="file" id="maizhen_files" name="files" class="form-control" multiple>
-                    <input type="hidden" name="filetypes" value="maizhen_files">
+                    <label for="maizhen_files" class="form-label">更新脉诊文件：</label>
+                    <input type="file" id="maizhen_files" name="maizhen_files" class="form-control" multiple>
                     </p>
                 </div>
             </div>
@@ -75,19 +74,9 @@
                         {% endfor %}
                     </span>
                     <p>
-                    <label for="shezhen_files" class="form-label" style="display: none;">更新舌诊文件：</label>
-                    <input type="file" id="shezhen_files" name="files" class="form-control" multiple>
-                    <input type="hidden" name="filetypes" value="shezhen_files">
+                    <label for="shezhen_files" class="form-label">更新舌诊文件：</label>
+                    <input type="file" id="shezhen_files" name="shezhen_files" class="form-control" multiple>
                     </p>
-                    <!-- <input type="file" id="shezhen_files" name="files" class="form-control" multiple style="display: none;">
-                    <input type="hidden" name="filetypes" value="shezhen_files">
-                    <button type="button" class="button" onclick="triggerFileInput('shezhen_files')">
-                      <svg class="svgIcon" viewBox="0 0 384 512">
-                        <path
-                          d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"
-                        ></path>
-                      </svg>
-                    </button> -->
                 </div>
             </div>
 
@@ -102,9 +91,8 @@
                         {% endfor %}
                     </span>
                     <p>
-                    <label for="hongwai_files" class="form-label" style="display: none;">更新舌诊文件：</label>
-                    <input type="file" id="hongwai_files" name="files" class="form-control" multiple>
-                    <input type="hidden" name="filetypes" value="hongwai_files">
+                    <label for="hongwai_files" class="form-label">更新红外热成像文件：</label>
+                    <input type="file" id="hongwai_files" name="hongwai_files" class="form-control" multiple>
                     </p>
                 </div>
             </div>
@@ -120,9 +108,8 @@
                         {% endfor %}
                     </span>
                     <p>
-                    <label for="junqun_files" class="form-label" style="display: none;">更新舌诊文件：</label>
-                    <input type="file" id="junqun_files" name="files" class="form-control" multiple>
-                    <input type="hidden" name="filetypes" value="junqun_files">
+                    <label for="junqun_files" class="form-label">更新阴道分泌物菌群文件：</label>
+                    <input type="file" id="junqun_files" name="junqun_files" class="form-control" multiple>
                     </p>
                 </div>
             </div>
@@ -138,9 +125,8 @@
                         {% endfor %}
                     </span>
                     <p>
-                    <label for="daixie_files" class="form-label" style="display: none;">更新舌诊文件：</label>
-                    <input type="file" id="daixie_files" name="files" class="form-control" multiple>
-                    <input type="hidden" name="filetypes" value="daixie_files">
+                    <label for="daixie_files" class="form-label">更新阴道分泌物代谢组学文件：</label>
+                    <input type="file" id="daixie_files" name="daixie_files" class="form-control" multiple>
                     </p>
                 </div>
             </div>
@@ -156,20 +142,9 @@
                         {% endfor %}
                     </span>
                     <p>
-                        <label for="vaginoscope_files" class="form-label" style="display: none;">更新阴道镜文件：</label>
-                        <input type="file" id="vaginoscope_files" name="files" class="form-control" multiple>
-                        <input type="hidden" name="filetypes" value="vaginoscope_files">
+                        <label for="vaginoscope_files" class="form-label">更新阴道镜文件：</label>
+                        <input type="file" id="vaginoscope_files" name="vaginoscope_files" class="form-control" multiple>
                     </p>
-                    <!-- <label for="vaginoscope_files" class="form-label" style="display: none;">更新阴道镜文件：</label>
-                    <input type="file" id="vaginoscope_files" name="files" class="form-control" multiple style="display: none;">
-                    <input type="hidden" name="filetypes" value="vaginoscope_files">
-                    <button type="button" class="button" onclick="triggerFileInput('vaginoscope_files')">
-                        <svg class="svgIcon" viewBox="0 0 384 512">
-                        <path
-                            d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"
-                        ></path>
-                        </svg>
-                    </button> -->
                 </div>
             </div>
 
@@ -184,9 +159,8 @@
                         {% endfor %}
                     </span>
                     <p>
-                    <label for="bingbian_files" class="form-label" style="display: none;">更新舌诊文件：</label>
-                    <input type="file" id="bingbian_files" name="files" class="form-control" multiple>
-                    <input type="hidden" name="filetypes" value="bingbian_files">
+                    <label for="bingbian_files" class="form-label">更新宫颈病变组织转录组学文件：</label>
+                    <input type="file" id="bingbian_files" name="bingbian_files" class="form-control" multiple>
                     </p>
                 </div>
             </div>
@@ -207,11 +181,11 @@
                 textarea.style.height = textarea.scrollHeight + 'px';
                 
                 textarea.addEventListener('input', (event) => {
-                    event.target.style.height = 'auto'; // Reset the height
-                    event.target.style.height = event.target.scrollHeight + 'px'; // Set it to the scroll height
+                    event.target.style.height = 'auto';
+                    event.target.style.height = event.target.scrollHeight + 'px';
                 });
             });
         });
-        </script>
+    </script>
 </body>
 </html>

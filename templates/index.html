@@ -15,16 +15,16 @@
         <table class="table">
             <thead>
                 <tr>
+                    <th>数据序号</th>
                     <th>姓名</th>
-                    <th>性别</th>
                     <th>操作</th>
                 </tr>
             </thead>
             <tbody>
                 {% for user in users %}
                 <tr>
+                    <td>{{ loop.index }}</td>
                     <td>{{ user.name }}</td>
-                    <td>{{ user.gender }}</td>
                     <td>
                         <a href="/edit/{{ user.id }}" class="btn btn-secondary">编辑</a>
                         <form action="/delete/{{ user.id }}" method="post" style="display: inline;">

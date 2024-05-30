@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add User</title>
-    <!-- 引入Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -29,49 +28,40 @@
             </div>
             <div class="mb-3">
                 <label for="ruoci_files" class="form-label">上传人体弱磁感应文件：</label>
-                <input type="file" id="ruoci_files" name="files" class="form-control" multiple>
-                <input type="hidden" name="filetypes" value="ruoci_files">
+                <input type="file" id="ruoci_files" name="ruoci_files" class="form-control" multiple>
             </div>
             <div class="mb-3">
                 <label for="maizhen_files" class="form-label">上传脉诊文件：</label>
-                <input type="file" id="maizhen_files" name="files" class="form-control" multiple>
-                <input type="hidden" name="filetypes" value="maizhen_files">
+                <input type="file" id="maizhen_files" name="maizhen_files" class="form-control" multiple>
             </div>
             <div class="mb-3">
                 <label for="shezhen_files" class="form-label">上传舌诊文件：</label>
-                <input type="file" id="shezhen_files" name="files" class="form-control" multiple required>
-                <input type="hidden" name="filetypes" value="shezhen_files">
+                <input type="file" id="shezhen_files" name="shezhen_files" class="form-control" multiple required>
             </div>
             <div class="mb-3">
                 <label for="hongwai_files" class="form-label">上传红外线热成像文件：</label>
-                <input type="file" id="hongwai_files" name="files" class="form-control" multiple>
-                <input type="hidden" name="filetypes" value="hongwai_files">
+                <input type="file" id="hongwai_files" name="hongwai_files" class="form-control" multiple>
             </div>
             <div class="mb-3">
                 <label for="junqun_files" class="form-label">上传阴道分泌物菌群文件：</label>
-                <input type="file" id="junqun_files" name="files" class="form-control" multiple required>
-                <input type="hidden" name="filetypes" value="junqun_files">
+                <input type="file" id="junqun_files" name="junqun_files" class="form-control" multiple required>
             </div>
             <div class="mb-3">
                 <label for="daixie_files" class="form-label">上传阴道分泌物代谢组学文件：</label>
-                <input type="file" id="daixie_files" name="files" class="form-control" multiple>
-                <input type="hidden" name="filetypes" value="daixie_files">
+                <input type="file" id="daixie_files" name="daixie_files" class="form-control" multiple>
             </div>
             <div class="mb-3">
                 <label for="vaginoscope_files" class="form-label">上传阴道镜文件：</label>
-                <input type="file" id="vaginoscope_files" name="files" class="form-control" multiple>
-                <input type="hidden" name="filetypes" value="vaginoscope_files">
+                <input type="file" id="vaginoscope_files" name="vaginoscope_files" class="form-control" multiple>
             </div>
             <div class="mb-3">
                 <label for="bingbian_files" class="form-label">上传宫颈病变组织转录组学文件：</label>
-                <input type="file" id="bingbian_files" name="files" class="form-control" multiple>
-                <input type="hidden" name="filetypes" value="bingbian_files">
+                <input type="file" id="bingbian_files" name="bingbian_files" class="form-control" multiple>
             </div>
             <button type="submit" class="btn btn-primary">添加数据</button>
         </form>
         <a href="/" class="btn btn-secondary mt-2">回到数据列表</a>
     </div>
-    <!-- 引入Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"></script>
     <script>
@@ -82,11 +72,11 @@
                 textarea.style.height = textarea.scrollHeight + 'px';
                 
                 textarea.addEventListener('input', (event) => {
-                    event.target.style.height = 'auto'; // Reset the height
-                    event.target.style.height = event.target.scrollHeight + 'px'; // Set it to the scroll height
+                    event.target.style.height = 'auto';
+                    event.target.style.height = event.target.scrollHeight + 'px';
                 });
             });
         });
-        </script>
+    </script>
 </body>
 </html>

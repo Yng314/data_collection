@@ -15,9 +15,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     gender = db.Column(db.String(10), nullable=False)
-    # 临床四诊信息
     sizhen = db.Column(db.String(1000), nullable=False)
-    # 中医体质辨识
     tizhi = db.Column(db.String(1000), nullable=False)
     files = db.relationship('File', backref='user', cascade="all, delete-orphan")
 
@@ -45,9 +43,9 @@ def add_user():
         gender = request.form['gender']
         sizhen = request.form['sizhen']
         tizhi = request.form['tizhi']
-        files = request.files.getlist('files')
-        print(files)
-        filetypes = request.form.getlist('filetypes')  # 确保获取正确的参数
+
+        file_inputs = ['ruoci_files', 'maizhen_files', 'shezhen_files', 'hongwai_files', 'junqun_files', 'daixie_files', 'vaginoscope_files', 'bingbian_files']
+        file_counter = {input_name: 0 for input_name in file_inputs}
 
         new_user = User(name=name, gender=gender, sizhen=sizhen, tizhi=tizhi)
         db.session.add(new_user)
@@ -56,13 +54,17 @@ def add_user():
         user_folder = os.path.join(app.config['UPLOAD_FOLDER'], str(new_user.id))
         os.makedirs(user_folder, exist_ok=True)
 
-        for file, filetype in zip(files, filetypes):  # 同时迭代文件和文件类型
-            if file and allowed_file(file.filename):
-                filename = secure_filename(file.filename)
-                file_path = os.path.join(user_folder, filename)
-                file.save(file_path)
-                new_file = File(filename=filename, filetype=filetype, user_id=new_user.id)  # 保存文件类型
-                db.session.add(new_file)
+        for input_name in file_inputs:
+            files = request.files.getlist(input_name)
+            for file in files:
+                if file and allowed_file(file.filename):
+                    file_counter[input_name] += 1
+                    extension = file.filename.rsplit('.', 1)[1].lower()
+                    new_filename = f"{input_name.split('_')[0]}_{file_counter[input_name]}.{extension}"
+                    file_path = os.path.join(user_folder, new_filename)
+                    file.save(file_path)
+                    new_file = File(filename=new_filename, filetype=input_name, user_id=new_user.id)
+                    db.session.add(new_file)
         db.session.commit()
         return redirect(url_for('index'))
     return render_template('add_data.html')
@@ -75,34 +77,43 @@ def edit_user(user_id):
         user.gender = request.form['gender']
         user.sizhen = request.form['sizhen']
         user.tizhi = request.form['tizhi']
-        files = request.files.getlist('files')
-        filetypes = request.form.getlist('filetypes')  # 确保获取正确的参数
-        print(files)
+
+        file_inputs = ['ruoci_files', 'maizhen_files', 'shezhen_files', 'hongwai_files', 'junqun_files', 'daixie_files', 'vaginoscope_files', 'bingbian_files']
+        file_counter = {input_name: 0 for input_name in file_inputs}
 
         user_folder = os.path.join(app.config['UPLOAD_FOLDER'], str(user.id))
         os.makedirs(user_folder, exist_ok=True)
-        for file, filetype in zip(files, filetypes):  # 同时迭代文件和文件类型
-            print(f'file: {file}')
-            print(f'filetype: {filetype}')
-            if file and allowed_file(file.filename):
-                filename = secure_filename(file.filename)
-                print(f'filename: {filename}')
-                file_path = os.path.join(user_folder, filename)
-                file.save(file_path)
 
-                # 查找已有的同类型文件并删除
-                existing_file = next((f for f in user.files if f.filetype == filetype), None)
-                if existing_file:
-                    old_file_path = os.path.join(user_folder, existing_file.filename)
-                    if os.path.exists(old_file_path):
-                        os.remove(old_file_path)
-                    existing_file.filename = filename  # 更新文件名
-                else:
-                    new_file = File(filename=filename, filetype=filetype, user_id=user.id)  # 新文件保存文件类型
+        for input_name in file_inputs:
+            files = request.files.getlist(input_name)
+            cleared = False
+            for file in files:
+                if file and allowed_file(file.filename):
+                    file_counter[input_name] += 1
+                    extension = file.filename.rsplit('.', 1)[1].lower()
+                    new_filename = f"{input_name.split('_')[0]}_{file_counter[input_name]}.{extension}"
+                    file_path = os.path.join(user_folder, new_filename)
+
+                    # 删除现有的同类型文件
+                    if not cleared:
+                        existing_files = [f for f in user.files if f.filetype == input_name]
+                        for existing_file in existing_files:
+                            old_file_path = os.path.join(user_folder, existing_file.filename)
+                            if os.path.exists(old_file_path):
+                                os.remove(old_file_path)
+                            db.session.delete(existing_file)
+                        cleared = True
+
+                    file.save(file_path)
+                    # 添加新的文件记录
+                    new_file = File(filename=new_filename, filetype=input_name, user_id=user.id)
                     db.session.add(new_file)
+                    
         db.session.commit()
         return redirect(url_for('index'))
     return render_template('edit_data.html', user=user)
+
+
 
 @app.route('/delete/<int:user_id>', methods=['POST'])
 def delete_user(user_id):
@@ -118,7 +129,6 @@ def delete_user(user_id):
     db.session.delete(user)
     db.session.commit()
     return redirect(url_for('index'))
-
 
 @app.route('/export')
 def export_data():
