@@ -73,6 +73,8 @@ def edit_user(user_id):
     if request.method == 'POST':
         user.name = request.form['name']
         user.gender = request.form['gender']
+        user.sizhen = request.form['sizhen']
+        user.tizhi = request.form['tizhi']
         files = request.files.getlist('files')
         filetypes = request.form.getlist('filetypes')  # 确保获取正确的参数
         print(files)

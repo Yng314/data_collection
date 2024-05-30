@@ -22,11 +22,11 @@
             </div>
             <div class="mb-3">
                 <label for="sizhen" class="form-label">临床四诊：</label>
-                <input type="text" id="sizhen" name="sizhen" value="{{ user.sizhen }}" required class="form-control">
+                <textarea id="sizhen" name="sizhen" rows="3" required class="form-control">{{ user.sizhen }}</textarea>
             </div>
             <div class="mb-3">
                 <label for="tizhi" class="form-label">中医体质辨识：</label>
-                <input type="text" id="tizhi" name="tizhi" value="{{ user.tizhi }}" required class="form-control">
+                <textarea id="tizhi" name="tizhi" rows="3" required class="form-control">{{ user.tizhi }}</textarea>
             </div>
             <div class="mb-3">
                 <div class="uploaded-files">
@@ -199,5 +199,19 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"></script>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const textareas = document.querySelectorAll('textarea');
+            
+            textareas.forEach(textarea => {
+                textarea.style.height = textarea.scrollHeight + 'px';
+                
+                textarea.addEventListener('input', (event) => {
+                    event.target.style.height = 'auto'; // Reset the height
+                    event.target.style.height = event.target.scrollHeight + 'px'; // Set it to the scroll height
+                });
+            });
+        });
+        </script>
 </body>
 </html>
